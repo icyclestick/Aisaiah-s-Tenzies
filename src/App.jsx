@@ -72,30 +72,28 @@ function App() {
           <meta property="og:title" content="Tenzies Game" />
           <meta
             property="og:description"
-            content="Roll until all dice are the same."
+            content="Palaro nga nito!! Roll until all dice are the same."
           />
-          <meta property="og:image" content="/image.png" />
+          <meta property="og:image" content="/Tenzies Game.png" />
           <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
           <meta property="og:type" content="website" />
           <title>Tenzies Game</title>
         </Helmet>
-        <h1>Welcome to Tenzies Game</h1>
-        {/* Your app content */}
+        <main>
+          {gameWon && <Confetti />}
+          <div aria-live='polite' className='sr-only'>
+            Congratulations! You Won!
+          </div>
+          <h1 className="title">Tenzies</h1>
+          <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+          <div className="dice-container">
+            {diceElements}
+          </div>
+          <button className="roll-dice" onClick={rollDice} ref={buttonRef}>
+            {gameWon ? "New Game" : "Roll"}
+          </button>
+        </main>
       </HelmetProvider>
-      <main>
-        {gameWon && <Confetti />}
-        <div aria-live='polite' className='sr-only'>
-          Congratulations! You Won!
-        </div>
-        <h1 className="title">Tenzies</h1>
-        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-        <div className="dice-container">
-          {diceElements}
-        </div>
-        <button className="roll-dice" onClick={rollDice} ref={buttonRef}>
-          {gameWon ? "New Game" : "Roll"}
-        </button>
-      </main>
     </>
   )
 }
