@@ -3,6 +3,7 @@ import './App.css'
 import Die from "./components/Die"
 import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
 
@@ -65,6 +66,22 @@ function App() {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <meta charset="UTF-8" />
+          <meta property="og:title" content="Tenzies Game" />
+          <meta
+            property="og:description"
+            content="Roll until all dice are the same."
+          />
+          <meta property="og:image" content="/image.png" />
+          <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
+          <meta property="og:type" content="website" />
+          <title>Tenzies Game</title>
+        </Helmet>
+        <h1>Welcome to Tenzies Game</h1>
+        {/* Your app content */}
+      </HelmetProvider>
       <main>
         {gameWon && <Confetti />}
         <div aria-live='polite' className='sr-only'>
