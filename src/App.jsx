@@ -73,7 +73,7 @@ function App() {
           property="og:description"
           content="Palaro nga nito!! Roll until all dice are the same."
         />
-        <meta property="og:image" content="/Tenzies Game.png" />
+        <meta property="og:image" content="https://aisaiahstenzies.netlify.app/Tenzies%20Game.png" />
         <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
         <meta property="og:type" content="website" />
         <title>Tenzies Game</title>
