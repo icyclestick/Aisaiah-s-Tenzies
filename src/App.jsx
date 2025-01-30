@@ -3,7 +3,7 @@ import './App.css'
 import Die from "./components/Die"
 import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 
 function App() {
 
@@ -66,34 +66,32 @@ function App() {
 
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <meta charset="UTF-8" />
-          <meta property="og:title" content="Tenzies Game" />
-          <meta
-            property="og:description"
-            content="Palaro nga nito!! Roll until all dice are the same."
-          />
-          <meta property="og:image" content="/Tenzies Game.png" />
-          <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
-          <meta property="og:type" content="website" />
-          <title>Tenzies Game</title>
-        </Helmet>
-        <main>
-          {gameWon && <Confetti />}
-          <div aria-live='polite' className='sr-only'>
-            Congratulations! You Won!
-          </div>
-          <h1 className="title">Tenzies</h1>
-          <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-          <div className="dice-container">
-            {diceElements}
-          </div>
-          <button className="roll-dice" onClick={rollDice} ref={buttonRef}>
-            {gameWon ? "New Game" : "Roll"}
-          </button>
-        </main>
-      </HelmetProvider>
+      <Helmet>
+        <meta charset="UTF-8" />
+        <meta property="og:title" content="Tenzies Game" />
+        <meta
+          property="og:description"
+          content="Palaro nga nito!! Roll until all dice are the same."
+        />
+        <meta property="og:image" content="/Tenzies Game.png" />
+        <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
+        <meta property="og:type" content="website" />
+        <title>Tenzies Game</title>
+      </Helmet>
+      <main>
+        {gameWon && <Confetti />}
+        <div aria-live='polite' className='sr-only'>
+          Congratulations! You Won!
+        </div>
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+        <div className="dice-container">
+          {diceElements}
+        </div>
+        <button className="roll-dice" onClick={rollDice} ref={buttonRef}>
+          {gameWon ? "New Game" : "Roll"}
+        </button>
+      </main>
     </>
   )
 }
