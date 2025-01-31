@@ -3,11 +3,17 @@ import './App.css'
 import Die from "./components/Die"
 import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
-import { Helmet } from 'react-helmet-async';
+import MyStopwatch from './components/stopWatch'
 
 function App() {
 
   const [dice, setDice] = useState(() => generateAllNewDice())
+
+  const [startTime, setStartTime] = useState(false)
+
+  const [newGame, setNewGame] = useState(false)
+
+  const [rollCount, setRollCount] = useState(0)
 
   const buttonRef = useRef(null)
 
@@ -32,10 +38,14 @@ function App() {
   }
 
   function hold(id) {
+    if (!startTime) {
+      setStartTime(true)
+    }
     setDice(oldDice => oldDice.map(die => (
       die.id === id ?
         { ...die, isHeld: !die.isHeld } : die
     )))
+
   }
 
   function rollDice() {
@@ -49,9 +59,13 @@ function App() {
       )
       )
     }
-    else {
-      setDice(() => generateAllNewDice())
-    }
+    setRollCount(prevRollCount => prevRollCount + 1)
+  }
+
+  function toggleNewGame() {
+    setStartTime(false)
+    setNewGame(true)
+    setDice(() => generateAllNewDice())
   }
 
 
@@ -66,32 +80,22 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <meta charset="UTF-8" />
-        <meta property="og:title" content="Tenzies Game" />
-        <meta
-          property="og:description"
-          content="Palaro nga nito!! Roll until all dice are the same."
-        />
-        <meta property="og:image:secure_url" content="https://aisaiahstenzies.netlify.app/TenziesImg.png" />
-        <meta property="og:url" content="https://aisaiahstenzies.netlify.app" />
-        <meta property="og:type" content="website" />
-        <title>Tenzies Game</title>
-      </Helmet>
       <main>
         {gameWon && <Confetti />}
         <div aria-live='polite' className='sr-only'>
           Congratulations! You Won!
         </div>
         <h1 className="title">Tenzies</h1>
+        <p className='counter'>Roll Counter: {rollCount}</p>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className="dice-container">
           {diceElements}
         </div>
-        <button className="roll-dice" onClick={rollDice} ref={buttonRef}>
+        <button className="roll-dice" onClick={gameWon ? toggleNewGame : rollDice} ref={buttonRef}>
           {gameWon ? "New Game" : "Roll"}
         </button>
       </main>
+      <MyStopwatch startTime={startTime} newGame={newGame} gameWon={gameWon} />
     </>
   )
 }
