@@ -66,7 +66,12 @@ function App() {
     setStartTime(false)
     setNewGame(true)
     setDice(() => generateAllNewDice())
+    setRollCount(0)
   }
+
+  useEffect(() => {
+    newGame ? setNewGame(false) : null
+  }, [newGame])
 
 
   const diceElements = dice.map(dieObj => (
